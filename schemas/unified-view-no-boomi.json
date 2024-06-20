@@ -34,6 +34,31 @@
             "data_source_name": "Apica Monitoring"
           },
           {
+            "query": "round(avg(sum by (hostname) (round(system_memory_utilization_ratio{ostype=~'linux|windows',state=~'used',hostname=~'.*'}*100, 0.1))), 0.01)",
+            "chart_type": "gauge",
+            "name": "Machine Memory Utilization",
+            "schema": "system_memory_utilization_ratio",
+            "options": {
+              "label": "% (Avg of Avg)",
+              "zone": {
+                "alert": 60,
+                "danger": 80
+              },
+              "order": 2,
+              "plot": {
+                "xLabel": "Timestamp",
+                "yLabel": "value",
+                "x": "Timestamp",
+                "y": [
+                  "value"
+                ],
+                "groupBy": "",
+                "errorColumn": ""
+              }
+            },
+            "data_source_name": "Apica Monitoring"
+          },
+          {
             "query": "round(avg by (hostname) (system_cpu_load_average_5m{ostype=~'linux|windows',hostname=~'.*'}), 0.01)*100",
             "chart_type": "counter",
             "name": "Load Average",
@@ -147,7 +172,7 @@
             "schema": "system_filesystem_inodes_usage",
             "options": {
               "label": "Total",
-              "order": 4,
+              "order": 1,
               "plot": {
                 "xLabel": "Timestamp",
                 "yLabel": "Count",
